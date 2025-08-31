@@ -1,0 +1,336 @@
+/* Import a clean, modern font */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --accent-color: #00c2ff;
+  --accent-glow: rgba(0, 194, 255, 0.3);
+  --text-primary: #ffffff;
+  --text-secondary: #cdd5e0;
+  --surface-color-glass: rgba(30, 30, 45, 0.5); /* For glass elements */
+  --surface-color-solid: #161b22; /* New solid card background */
+  --border-color: rgba(255, 255, 255, 0.1);
+  --blur-amount: 12px;
+  --border-radius: 16px;
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* --- Animated Aurora Background --- */
+body {
+  color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 40px 15px;
+  font-family: "Inter", sans-serif;
+  line-height: 1.6;
+  background-color: #0d1117;
+  position: relative;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  filter: blur(100px);
+  opacity: 0.8;
+}
+
+body::before {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, #8a2be2, transparent 60%);
+  bottom: -150px;
+  left: -150px;
+  animation: move-glow1 15s infinite alternate;
+}
+
+body::after {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--accent-color), transparent 60%);
+  top: -200px;
+  right: -200px;
+  animation: move-glow2 18s infinite alternate;
+}
+
+@keyframes move-glow1 {
+  to {
+    transform: translate(100px, 50px) rotate(20deg);
+  }
+}
+@keyframes move-glow2 {
+  to {
+    transform: translate(-80px, 30px) rotate(-30deg);
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  z-index: 1;
+}
+
+/* --- Header & Search --- */
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px var(--accent-glow);
+}
+
+h1 i {
+  color: var(--accent-color);
+}
+
+header p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.search-container {
+  display: flex;
+  margin-bottom: 30px;
+  gap: 10px;
+}
+
+/* --- Glass Effect (for Inputs/Buttons) --- */
+input[type="text"],
+button {
+  background: var(--surface-color-glass);
+  backdrop-filter: blur(var(--blur-amount));
+  -webkit-backdrop-filter: blur(var(--blur-amount));
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 1rem;
+  color: var(--text-primary);
+  outline: none;
+}
+
+input[type="text"]:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+button {
+  background: rgba(0, 194, 255, 0.2);
+  color: var(--text-primary);
+  padding: 0 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background: rgba(0, 194, 255, 0.4);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+/* --- New Solid Profile Card --- */
+#profile-container {
+  background: var(--surface-color-solid);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 30px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37), 0 0 15px -5px var(--accent-glow);
+  transition: var(--transition);
+  animation: fadeIn 0.5s ease-out;
+}
+
+#profile-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 25px -5px var(--accent-glow);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+#avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent-color);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+#name {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+#username {
+  color: var(--accent-color);
+  margin-bottom: 12px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 20px;
+  background-color: var(--accent-color);
+  color: #0d1117;
+  text-decoration: none;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px var(--accent-glow);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.stat {
+  padding: 15px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.stat span {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.stat i {
+  display: none;
+}
+
+.additional-info {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 25px;
+}
+
+.info-item i {
+  color: var(--accent-color);
+}
+
+.info-item a:hover {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
+
+/* --- New Solid Repositories Section --- */
+.repos-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.repos-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+.repo-card {
+  background: var(--surface-color-solid);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: var(--transition);
+}
+
+.repo-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-color);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 10px -5px var(--accent-glow);
+}
+
+.repo-name {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.repo-description {
+  color: var(--text-secondary);
+}
+
+.repo-meta-item i {
+  color: var(--accent-color);
+}
+
+/* --- Utility & Error --- */
+#error-container {
+  background-color: rgba(239, 68, 68, 0.5);
+  backdrop-filter: blur(var(--blur-amount));
+  color: var(--text-primary);
+  padding: 15px;
+  border-radius: var(--border-radius);
+  text-align: center;
+  border: 1px solid rgba(239, 68, 68, 0.8);
+}
+
+.hidden {
+  display: none;
+}
+
+/* --- Responsive Design --- */
+@media (min-width: 500px) {
+  .additional-info {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .repos-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .stats {
+    grid-template-columns: 1fr;
+  }
+}
